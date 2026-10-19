@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&family=Noto+Serif+KR:wght@400;600&family=IBM+Plex+Mono:wght@400;600&family=Nanum+Gothic+Coding:wght@400;700&family=Jua&family=Gowun+Dodum&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&family=Noto+Serif+KR:wght@400;600&family=IBM+Plex+Mono:wght@400;600&family=Nanum+Gothic+Coding:wght@400;700&family=Jua&family=Gowun+Dodum&family=Special+Elite&display=swap">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="my-style.css">
@@ -35,9 +35,25 @@
 
 <!-- ① 첫 화면 — 사진이 여백 없이 화면 가득, 그 위 아래쪽 왼쪽에 대표 제목. 글자색은 sig.js가 사진 명도로 고른다(§I-6) -->
 <div class="ca-top ca-top--hero" id="top">
-  <figure class="ca-hero ca-hero--full"><img src="assets/space1_01.jpg" width="2056" height="3652" alt="첫 화면 우리의 일상 사진 1"></figure>
+  <figure class="ca-hero ca-hero--full my-hf">
+    <img class="is-cur" src="assets/space1_01.jpg" width="2056" height="3652" alt="첫 화면 우리의 일상 사진 1">
+    <img data-src="assets/space1_02.jpg" width="2921" height="2921" alt="첫 화면 우리의 일상 사진 2">
+    <img data-src="assets/space1_03.jpg" width="2865" height="2865" alt="첫 화면 우리의 일상 사진 3">
+    <img data-src="assets/space1_04.jpg" width="2992" height="2992" alt="첫 화면 우리의 일상 사진 4">
+    <img data-src="assets/space1_05.jpg" width="2992" height="2992" alt="첫 화면 우리의 일상 사진 5">
+    <img data-src="assets/space2_01.jpg" width="4000" height="3000" alt="첫 화면 새로운 일상 사진 1">
+    <img data-src="assets/space2_02.jpg" width="3974" height="2980" alt="첫 화면 새로운 일상 사진 2">
+    <img data-src="assets/space2_03.jpg" width="3000" height="4000" alt="첫 화면 새로운 일상 사진 3">
+    <img data-src="assets/space2_04.jpg" width="2249" height="4000" alt="첫 화면 새로운 일상 사진 4">
+    <img data-src="assets/space2_05.jpg" width="2650" height="4000" alt="첫 화면 새로운 일상 사진 5">
+    <img data-src="assets/space3_01.jpg" width="3948" height="2220" alt="첫 화면 과거의 일상 사진 1">
+    <img data-src="assets/space3_02.jpg" width="3000" height="4000" alt="첫 화면 과거의 일상 사진 2">
+    <img data-src="assets/space3_03.jpg" width="3000" height="4000" alt="첫 화면 과거의 일상 사진 3">
+    <img data-src="assets/space3_04.jpg" width="2286" height="3200" alt="첫 화면 과거의 일상 사진 4">
+    <img data-src="assets/space3_05.jpg" width="2958" height="3944" alt="첫 화면 과거의 일상 사진 5">
+  </figure>
   <div class="ca-hero-t">
-    <h1 class="ca-h1">나는 걷고, 떠나고, 바라보며, 손에 쥐는 작은 것들로 일상 속에서 나를 채운다.</h1>
+    <h1 class="ca-h1 my-tw" lang="en">I walk, I leave, I look —<br>and with the small things I hold,<br>I fill myself within the everyday.</h1>
   </div>
 </div>
 
@@ -61,6 +77,7 @@
           <figure class="ca-fig"><img src="assets/w04_sky05_unknown_unknown.jpg" width="1800" height="1168" alt="1장 시선 하늘 사진 5"></figure>
           <p class="ca-why">고개를 들어야 보이는 하늘을 본다</p>
         </div>
+        <p class="my-quote">길을 걷다가도 문득 위를 올려다본다.<br>하늘의 파편이 나를 비춘다.</p>
       </article>
       <article class="ca-card">
         <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">손</button></h3>
@@ -74,6 +91,7 @@
           <figure class="ca-fig"><img src="assets/w04_hands05_unknown_unknown.jpg" width="1800" height="1200" alt="1장 시선 손 사진 5"></figure>
           <p class="ca-why">손끝에서 만들어지는 것에 눈이 간다</p>
         </div>
+        <p class="my-quote">모든 것은 손끝에서 피어난다. 아름답다.</p>
       </article>
       <article class="ca-card">
         <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">길</button></h3>
@@ -87,14 +105,15 @@
           <figure class="ca-fig"><img src="assets/w04_road05_unknown_unknown.jpg" width="1201" height="1800" alt="1장 시선 길 사진 5"></figure>
           <p class="ca-why">각자 다른 방향으로 가는 발걸음을 본다</p>
         </div>
+        <p class="my-quote">다를 것 없는 하루를 보낸다. 우리 모두 다른 하루를.</p>
       </article>
     </div>
   </section>
 
   <!-- ④ 2장 사람 — 12단: 왼쪽 4단 = 장 이름 · 큰 문장 | 오른쪽 = 이유 카드 셋 -->
-  <section class="ca-sec ca-split" id="s3" aria-labelledby="s3-t">
-    <div class="ca-head ca-row"><h2 class="ca-label" id="s3-t">2장 사람 · 박지훈</h2>
-      <p class="ca-lead">나는 카메라 밖의 찰나에도 진심인 사람을 본다.</p>
+  <section class="ca-sec ca-split my-dark" id="s3" aria-labelledby="s3-t">
+    <div class="ca-head ca-row"><h2 class="ca-label" id="s3-t">2장 사람</h2>
+      <p class="ca-lead">박지훈 · 나는 카메라 밖의 찰나에도 진심인 사람을 본다.</p>
     </div>
     <div class="ca-grid ca-row">
       <article class="ca-card">
@@ -105,6 +124,43 @@
           <figure class="ca-fig"><img src="assets/w05_pjh21.jpg" width="420" height="420" alt="2장 사람 노력하는 그 모습 사진 1"></figure>
           <p class="ca-why">101명이라는 많은 사람들 중 눈에 띄기 위해 노력하는 모습이 기특하다</p>
         </div>
+        <template class="my-news"><!-- 2장 상세 · 신문 A — 내용: GQ 코리아 기사 요약(Claude 정리) · 최종 2위는 여성동아 기사 -->
+          <article class="my-np my-np--a" lang="ko">
+            <header class="my-np-mast">
+              <p class="my-np-ear">2장 사람<br>박지훈 특집</p>
+              <p class="my-np-name">최애일보</p>
+              <p class="my-np-ear is-r">제1호<br>노력하는 그 모습</p>
+            </header>
+            <p class="my-np-line"><span>2017. 06. 23 · 금요일</span><span>taste-archive</span><span>No. 01</span></p>
+            <h2 class="my-np-hl">윙크 한 번에 담긴 수십 번의 연습</h2>
+            <p class="my-np-sub">1회부터 5회까지 1위 — ‘윙크남’은 우연이 아니었다</p>
+            <div class="my-np-body">
+              <h3 class="my-np-h my-np-hc">왜 그를 지지했나</h3>
+              <section class="my-np-c1">
+                <div class="my-np-box">
+                  <p class="my-np-box-t">핵심 정리</p>
+                  <ul><li>1~5회 연속 1위</li><li>별명 ‘윙크남’</li><li>귀여운 무대부터 도발적인 무대까지</li></ul>
+                </div>
+                <p>GQ 코리아 세 번째 글의 주인공, 박지훈. ‘프로듀스 101 시즌2’ 중 그를 응원하고 지지하게 된 이유를 알아보자.</p>
+                <p>그는 1회부터 5회까지 1위를 지킨 연습생이다. 화제가 된 윙크 장면도 운이 아니라, 꽃가루가 흩날리는 가운데 수십 번 반복해서 얻어 낸 장면이었다.</p>
+              </section>
+              <section class="my-np-c2">
+                <p>눈에 띄기 위한 노력은 작은 데서도 보였다. 신발끈을 형광색 끈으로 바꿔 맨 일화가 대표적이다.</p>
+                <p>박지훈은 외모만이 아니라 고른 실력과 무대 위 표정 연기를 갖췄다고 평가할 수 있다. 귀여운 무대와 남성적이고 도발적인 무대를 모두 소화할 수 있고 사진과 무대에서 드러난 고전적인 분위기에 ‘망국의 왕자’ 같다는 반응이 괜히 나온 것이 아니다.</p>
+              </section>
+              <figure class="my-np-fig my-np-f1"><img src="assets/w05_pjh21.jpg" width="420" height="420" alt="프로듀스 101 시즌2 윙크 장면 네 컷"><figcaption>프로듀스 101 시즌2의 윙크 장면</figcaption></figure>
+              <section class="my-np-wide">
+                <h3 class="my-np-h2">순위를 내려놓은 마지막 무대</h3>
+                <p>최종화의 그는 힘을 빼고 자연스럽게 1위 자리를 내려놓았다. 순위가 어떻든 그는 여전히 성실한 소년이다. 그리고 최종 2위로 워너원의 멤버가 되었다.</p>
+              </section>
+              <div class="my-np-note"><p class="my-np-box-t">내가 본 것</p><p>101명이라는 많은 사람들 중 눈에 띄기 위해 노력하는 모습이 기특하다</p></div>
+              <section class="my-np-c3">
+                <figure class="my-np-fig"><img src="assets/w05_pjh13.jpg" width="735" height="490" alt="CITER 9월호 현장 비하인드 속 박지훈"><figcaption>CITER 9월호 현장 비하인드</figcaption></figure>
+              </section>
+            </div>
+            <p class="my-np-src">출처 · GQ 코리아 「나는 왜 박지훈을 지지했나」 이예지 에디터, 2017.06.23 <a href="https://www.gqkorea.co.kr/2017/06/23/%EB%82%98%EB%8A%94-%EC%99%9C-%EB%B0%95%EC%A7%80%ED%9B%88%EC%9D%84-%EC%A7%80%EC%A7%80%ED%96%88%EB%82%98/" target="_blank" rel="noopener">기사 보기 →</a> · 여성동아 「박지훈 입문자를 위한 아이돌 설명서」 윤혜진 객원기자, 2026.04.23 · 기사 내용은 요약·정리한 것입니다</p>
+          </article>
+        </template>
       </article>
       <article class="ca-card">
         <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">팬과 주변 사람들을 대하는 태도</button></h3>
@@ -114,15 +170,107 @@
           <figure class="ca-fig"><img src="assets/w05_pjh3.jpg" width="2048" height="1366" alt="2장 사람 팬과 주변 사람들을 대하는 태도 사진 1"></figure>
           <p class="ca-why">먼 거리에서 오직 자신을 보러 온 팬들에게 그 사랑을 돌려주고 싶어 하는 것 같다</p>
         </div>
+        <template class="my-news"><!-- 2장 상세 · 신문 B — 내용: 디스패치 팬미팅 기사 + 스포츠동아 인터뷰 요약(Claude 정리) -->
+          <article class="my-np my-np--b" lang="ko">
+            <header class="my-np-mast">
+              <p class="my-np-ear">2장 사람<br>박지훈 특집</p>
+              <p class="my-np-name">최애일보</p>
+              <p class="my-np-ear is-r">제2호<br>팬과 주변 사람들을<br>대하는 태도</p>
+            </header>
+            <p class="my-np-line"><span>2026. 04 – 06</span><span>taste-archive</span><span>No. 02</span></p>
+            <h2 class="my-np-hl">팬이 원하면 다 한다, 그러나 으스대지 않는다</h2>
+            <p class="my-np-sub">팬미팅 세 시간, 천여 명과 눈 맞춤 — 흥행 뒤에도 들뜨지 않는 태도</p>
+            <div class="my-np-body">
+              <figure class="my-np-fig my-np-f1"><img src="assets/w05_pjh3.jpg" width="2048" height="1366" alt="‘왕과 사는 남자’ 무대인사 속 박지훈"><figcaption>‘왕과 사는 남자’ 무대인사</figcaption></figure>
+              <aside class="my-np-box my-np-nums">
+                <p class="my-np-box-t">숫자로 본 팬미팅</p>
+                <dl>
+                  <div><dt>2시간</dt><dd>공연</dd></div>
+                  <div><dt>약 3시간</dt><dd>하이바이회까지 함께</dd></div>
+                  <div><dt>1,000여 명</dt><dd>한 명씩 눈 맞춤</dd></div>
+                  <div><dt>2번</dt><dd>곤룡포 버전 무대</dd></div>
+                </dl>
+              </aside>
+              <section class="my-np-c1">
+                <h3 class="my-np-h">“지훈아! 누나왔다” 팬미팅 현장</h3>
+                <p>4월 25~26일 서울 광진구 예스24 라이브홀에서 ‘2026 박지훈 팬미팅 같은 자리’가 열렸다. 팬들이 요청하면 그는 그 자리에서 바로 애교를 보여 주고, 처음 보는 챌린지도 현장에서 배워 냈다. 팬이 건넨 브로콜리를 들고 포즈를 취하고, “네 이놈”도 우렁차게 외쳤다. 시키는 건 다 하는 사람, 그게 박지훈이다.</p>
+                <p>하이바이회에서는 팬덤 메이 천여 명과 한 명씩 눈을 맞추고, 스케치북에 적힌 부탁도 하나도 빼놓지 않았다. 퇴근길에는 차 창문을 열고 인사까지 건넸다. 팬들이 그를 배려심 있고 예의 바르며 진정성 있는 사람이라고 말하는 이유가 여기에 있다.</p>
+              </section>
+              <section class="my-np-c2">
+                <h3 class="my-np-h">“혼자 잘한 게 아니잖아요”</h3>
+                <p>그는 작품이 잘됐다고 거들먹거리는 행동을 정말 싫어한다. ‘왕과 사는 남자’가 흥행했을 때도 기분은 좋았지만 들뜨지 않았다. 혼자 잘한 게 아니라 함께한 사람들의 노고 덕분이라는 것. ‘취사병 전설이 되다’를 마친 뒤에도 먼저 꺼낸 말은 함께한 배우들과 제작진에 대한 고마움이었다.</p>
+                <p>앞으로도 말과 행동을 조심하겠다는 이유는 단 하나, 팬들과 오래 함께하고 싶어서다. 그래서 당분간은 아이돌 활동에 집중하며 팬미팅과 공연을 준비한다고 한다.</p>
+              </section>
+              <blockquote class="my-np-quote"><p>“팬들은 저에게 사랑 그 이상이에요.”</p><cite>— 스포츠동아 인터뷰 중</cite></blockquote>
+              <div class="my-np-strip">
+                <figure class="my-np-fig"><img src="assets/w05_pjh6.jpg" width="1023" height="1365" alt="사운드웨이브 팬사인회 속 박지훈"><figcaption>사운드웨이브 팬사인회</figcaption></figure>
+                <figure class="my-np-fig"><img src="assets/w05_pjh20.jpg" width="778" height="972" alt="‘왕과 사는 남자’ 영화 속 박지훈"><figcaption>‘왕과 사는 남자’ 영화 중</figcaption></figure>
+              </div>
+              <div class="my-np-note"><p class="my-np-box-t">내가 본 것</p><p>먼 거리에서 오직 자신을 보러 온 팬들에게 그 사랑을 돌려주고 싶어 하는 것 같다</p></div>
+            </div>
+            <p class="my-np-src">출처 · 디스패치 「[ⓓ팬미팅] “지훈아! 누나왔다”…박지훈, 천년돌의 귀환」 김지호 기자, 2026.04.27 <a href="https://www.dispatch.co.kr/2341892" target="_blank" rel="noopener">기사 보기 →</a> · 스포츠동아 「박지훈 “흥행했다고 으스대는 행동 극혐…팬들 오래 보고파”」 홍세영 기자, 2026.06.22 <a href="https://sports.donga.com/ent/article/all/20260622/134151523/2" target="_blank" rel="noopener">기사 보기 →</a> · 기사 내용은 요약·정리한 것입니다</p>
+          </article>
+        </template>
       </article>
       <article class="ca-card">
         <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">본업에 진지하다</button></h3>
-          <p class="ca-when">음악방송 활동을 하며 나태하게 굴지 않는다</p>
+          <p class="ca-when">음악 방송 활동을 하며 나태하게 굴지 않는다</p>
         </div>
         <div class="ca-body">
           <figure class="ca-fig"><img src="assets/w05_pjh17.jpg" width="736" height="1023" alt="2장 사람 본업에 진지하다 사진 1"></figure>
           <p class="ca-why">언제 어디서나 모든 일에 진지하고 진중하게 임하는 사람 같다</p>
         </div>
+        <template class="my-news"><!-- 2장 상세 · 신문 C — 내용: 여성동아 기사 요약(Claude 정리) -->
+          <article class="my-np my-np--c" lang="ko">
+            <header class="my-np-mast">
+              <p class="my-np-ear">2장 사람<br>박지훈 특집</p>
+              <p class="my-np-name">최애일보</p>
+              <p class="my-np-ear is-r">제3호<br>본업에 진지하다</p>
+            </header>
+            <p class="my-np-line"><span>2026. 04. 23 · 목요일</span><span>taste-archive</span><span>No. 03</span></p>
+            <h2 class="my-np-hl">천만 배우가 된 뒤에도 무대를 놓지 않는다</h2>
+            <p class="my-np-sub">데뷔 9년 만의 첫 싱글 ‘RE:FLECT’ — 가수 활동에 진심인 이유</p>
+            <div class="my-np-body">
+              <p class="my-np-lead">영화 ‘왕과 사는 남자’는 개봉 67일째인 4월 11일 약 1,628만 관객을 모으며 역대 관객 수 2위에 올랐고, 박지훈은 상업영화 데뷔작으로 천만 배우가 됐다. 하지만 그의 뿌리는 아이돌이다. 오디션에서 그토록 열심히 윙크한 것도 아이돌로 데뷔하기 위해서였다.</p>
+              <div class="my-np-photos">
+                <figure class="my-np-fig my-np-f1"><img src="assets/w05_pjh17.jpg" width="736" height="1023" alt="미니 6집 무대 위 박지훈"><figcaption>미니 6집 무대</figcaption></figure>
+                <figure class="my-np-fig"><img src="assets/w05_pjh15.jpg" width="609" height="628" alt="미니 7집 앨범 자켓 속 박지훈"><figcaption>미니 7집 앨범 자켓</figcaption></figure>
+                <figure class="my-np-fig"><img src="assets/w05_pjh2.jpg" width="800" height="1200" alt="씨네21 1502호 속 박지훈"><figcaption>씨네21 1502호</figcaption></figure>
+              </div>
+              <section class="my-np-col">
+                <p class="my-np-no">01</p>
+                <h3 class="my-np-h">첫 싱글, 꽉 채운 세 곡</h3>
+                <p>2023년 4월 미니 7집 ‘Blank or Black’ 이후 3년 만의 앨범이다. 솔로로 정규 1집과 미니 7집까지, 그는 늘 앨범을 꽉 채워 냈다. 4월 29일 나온 첫 싱글에도 타이틀곡 ‘Bodyelse’를 포함해 세 곡이 담겼다.</p>
+                <p>‘취사병 전설이 되다’ 촬영을 마치자마자 뮤직비디오를 찍었고, 음악 방송과 5월 23일 도쿄, 30~31일 서울 팬 콘서트, 워너원 리얼리티까지 쉼 없이 이어진다. 좋아서 하는 일이 아니라면 해낼 수 없는 일정이다.</p>
+              </section>
+              <section class="my-np-col">
+                <p class="my-np-no">02</p>
+                <h3 class="my-np-h">예쁜 얼굴, 파워풀한 춤</h3>
+                <p>워너원에서는 서브보컬과 리드댄서였다. 중학생 때 스트리트 댄서의 팝핑 영상을 보고 춤에 빠져 아이돌로 진로를 바꿨다.</p>
+                <p>연습생 시절에는 무릎에 물이 차도 새벽 2~3시까지 연습하고 아침 6시에 등교했다. ‘약한영웅’을 찍는 동안에도 촬영이 끝나면 동료 배우와 연습실에서 춤을 맞춰 봤다. 춤을 얼마나 좋아하는지 알 수 있는 대목이다.</p>
+              </section>
+              <section class="my-np-col">
+                <p class="my-np-no">03</p>
+                <h3 class="my-np-h">보컬과 랩, 둘 다</h3>
+                <p>보컬로 시작해 랩까지 해낸다. 노래할 때는 미성이, 랩을 할 때는 저음이 나와 목소리가 다채롭다.</p>
+                <p>꼭 들어 봐야 할 곡은 워너원 ‘묻고싶다’, 첫 솔로곡 ‘L.O.V.E’, 미니 2집 ‘360’, ‘I Wonder’. 팬송 ‘MayDay’와 ‘Young 20’도 곡 자체로 사랑받는다.</p>
+              </section>
+              <aside class="my-np-box my-np-time">
+                <p class="my-np-box-t">박지훈 연표</p>
+                <ol>
+                  <li><b>1999</b>출생</li>
+                  <li><b>초1</b>아역 배우로 첫 촬영</li>
+                  <li><b>2017</b>프로듀스 101 시즌2 최종 2위 · 워너원 데뷔</li>
+                  <li><b>2019~</b>워너원 해체 뒤 연기 병행</li>
+                  <li><b>2023.04</b>미니 7집 ‘Blank or Black’</li>
+                  <li><b>2026.04.29</b>첫 싱글 ‘RE:FLECT’</li>
+                </ol>
+              </aside>
+              <div class="my-np-note"><p class="my-np-box-t">내가 본 것</p><p>언제 어디서나 모든 일에 진지하고 진중하게 임하는 사람 같다</p></div>
+            </div>
+            <p class="my-np-src">출처 · 여성동아 「박지훈 입문자를 위한 아이돌 설명서」 윤혜진 객원기자, 2026.04.23 <a href="https://woman.donga.com/culture/article/all/12/6195295/1" target="_blank" rel="noopener">기사 보기 →</a> · 기사 내용은 요약·정리한 것입니다</p>
+          </article>
+        </template>
       </article>
     </div>
   </section>
@@ -134,7 +282,7 @@
     <div class="ca-track" data-scatter>
       <article class="ca-card">
         <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">우리의 일상</button></h3>
-          <p class="ca-when">걷고 웃고 인생을 즐겨</p>
+          <p class="ca-when">항상 향유하던 그 길거리</p>
         </div>
         <div class="ca-body">
           <figure class="ca-fig"><img src="assets/space1_01.jpg" width="2056" height="3652" alt="3장 공간 우리의 일상 사진 1"></figure>
@@ -147,7 +295,7 @@
       </article>
       <article class="ca-card">
         <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">새로운 일상</button></h3>
-          <p class="ca-when">여행 가서 웃고 떠들고 즐겨</p>
+          <p class="ca-when">낯선 모험의 시작을 알리는 바람</p>
         </div>
         <div class="ca-body">
           <figure class="ca-fig"><img src="assets/space2_01.jpg" width="4000" height="3000" alt="3장 공간 새로운 일상 사진 1"></figure>
@@ -160,7 +308,7 @@
       </article>
       <article class="ca-card">
         <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">과거의 일상</button></h3>
-          <p class="ca-when">관찰하고 햇빛을 만끽해</p>
+          <p class="ca-when">나를 따스하게 비추는 햇빛</p>
         </div>
         <div class="ca-body">
           <figure class="ca-fig"><img src="assets/space3_01.jpg" width="3948" height="2220" alt="3장 공간 과거의 일상 사진 1"></figure>
@@ -177,6 +325,7 @@
   <!-- ⑥ 4장 물건 — 카드 다섯(번호 [01]은 시스템이 붙임) -->
   <section class="ca-sec" id="s5" aria-labelledby="s5-t">
     <div class="ca-head ca-row"><h2 class="ca-label" id="s5-t">4장 물건</h2>
+      <p class="ca-lead">나는 삶을 살며 이 물건들과 함께한다.</p>
     </div>
     <div class="ca-track" data-index>
       <article class="ca-card">
@@ -184,8 +333,8 @@
           <p class="ca-when">물건에 귀여운 포인트를 더한다</p>
         </div>
         <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj1_01.jpg" width="1380" height="1842" alt="4장 물건 키링 사진 1"><figcaption>일반적인 모습</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj1_02.jpg" width="3000" height="3000" alt="4장 물건 키링 사진 2"><figcaption>펼친 모습</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o1_1.jpg" width="1362" height="1816" alt="4장 물건 키링 사진 1"><figcaption>일반적인 모습</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o1_2.jpg" width="1526" height="2036" alt="4장 물건 키링 사진 2"><figcaption>펼친 모습</figcaption></figure>
           <p class="ca-why">내가 애정하는 캐릭터여서</p>
         </div>
       </article>
@@ -194,8 +343,8 @@
           <p class="ca-when">머리카락을 틀어 올려 묶거나 스타일링한다</p>
         </div>
         <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj2_01.jpg" width="2442" height="2442" alt="4장 물건 머리집게 사진 1"><figcaption>세웠을 때</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj2_02.jpg" width="2868" height="3824" alt="4장 물건 머리집게 사진 2"><figcaption>눕혔을 때</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o2_1.jpg" width="2496" height="3328" alt="4장 물건 머리집게 사진 1"><figcaption>세웠을 때</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o2_2.jpg" width="2836" height="3780" alt="4장 물건 머리집게 사진 2"><figcaption>눕혔을 때</figcaption></figure>
           <p class="ca-why">간편하고 예뻐서</p>
         </div>
       </article>
@@ -204,8 +353,8 @@
           <p class="ca-when">핸드폰이나 아이패드를 닦는다</p>
         </div>
         <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj3_01.jpg" width="2780" height="2780" alt="4장 물건 고흐 안경닦이 사진 1"><figcaption>전체 모습</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj3_02.jpg" width="3000" height="2250" alt="4장 물건 고흐 안경닦이 사진 2"><figcaption>접은 모습</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o3_1.jpg" width="3000" height="4000" alt="4장 물건 고흐 안경닦이 사진 1"><figcaption>전체 모습</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o3_2.jpg" width="3000" height="4000" alt="4장 물건 고흐 안경닦이 사진 2"><figcaption>접은 모습</figcaption></figure>
           <p class="ca-why">고흐 그림이 예뻐서</p>
         </div>
       </article>
@@ -214,8 +363,8 @@
           <p class="ca-when">보조배터리를 보관한다</p>
         </div>
         <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj4_01.jpg" width="3518" height="2638" alt="4장 물건 복주머니 사진 1"><figcaption>전체 모습</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj4_02.jpg" width="2666" height="2666" alt="4장 물건 복주머니 사진 2"><figcaption>입구 부분</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o4_1.jpg" width="2570" height="3426" alt="4장 물건 복주머니 사진 1"><figcaption>전체 모습</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o4_2.jpg" width="2878" height="3838" alt="4장 물건 복주머니 사진 2"><figcaption>입구 부분</figcaption></figure>
           <p class="ca-why">사이즈가 딱 들어맞아서</p>
         </div>
       </article>
@@ -224,8 +373,8 @@
           <p class="ca-when">글씨를 틀렸을 때 지운다</p>
         </div>
         <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj5_01.jpg" width="2658" height="2658" alt="4장 물건 수정테이프 사진 1"><figcaption>전체 모습</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj5_02.jpg" width="3826" height="2870" alt="4장 물건 수정테이프 사진 2"><figcaption>톱니바퀴 부분</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o5_1.jpg" width="2208" height="2944" alt="4장 물건 수정테이프 사진 1"><figcaption>전체 모습</figcaption></figure>
+          <figure class="ca-fig"><img src="assets/o5_2.jpg" width="3000" height="4000" alt="4장 물건 수정테이프 사진 2"><figcaption>톱니바퀴 부분</figcaption></figure>
           <p class="ca-why">깔끔하게 잘 지워져서</p>
         </div>
       </article>
@@ -233,13 +382,13 @@
   </section>
 
   <!-- ⑦ 기준이 쌓이는 자리 — 장 키워드별 기준 한 줄 + 호불호(한 줄). 물건(7주)은 회고 뒤 채움 -->
-  <section class="ca-sec" id="s6" aria-labelledby="s6-t">
+  <section class="ca-sec my-foot" id="s6" aria-labelledby="s6-t">
     <div class="ca-head ca-row"><h2 class="ca-label" id="s6-t">기준이 쌓이는 자리</h2></div>
     <dl class="ca-rows">
       <div class="ca-r ca-row"><dt>시선</dt><dd>나는 사진이 많은 화면에서 움직임으로 흐름을 만든다.</dd></div>
       <div class="ca-r ca-row"><dt>사람</dt><dd>나는 사진이 주인공인 화면에서 배경을 검정으로 가라앉힌다.</dd></div>
       <div class="ca-r ca-row"><dt>공간</dt><dd>나는 공간을 경험할 수 있는 유동적인 화면을 구성한다.</dd></div>
-      <div class="ca-r ca-row"><dt>물건</dt><dd></dd></div>
+      <div class="ca-r ca-row"><dt>물건</dt><dd>나는 작은 물건일수록 한 장씩 넘겨 보며 오래 머물게 한다.</dd></div>
       <div class="ca-r ca-row"><dt>호불호</dt><dd>어둡고 더러운 곳, 불쾌하고 불편한 것</dd></div>
     </dl>
   </section>
@@ -251,5 +400,16 @@
 </footer>
 
 <script src="sig.js"></script>
+<script src="my-hero-fade.js"></script>
+<script src="my-typing.js"></script>
+<script src="my-fade-in.js"></script>
+<script src="my-wave.js"></script>
+<script src="my-bars.js"></script>
+<script src="my-deco.js"></script>
+<script src="my-collage.js"></script>
+<script src="my-tear.js"></script>
+<script src="my-news.js"></script>
+<script src="my-polaroid.js"></script>
+<script src="my-map.js"></script>
 </body>
 </html>

@@ -4,10 +4,10 @@
 
 :root {
   /* ① 바탕 색 — 페이지 전체 바탕(원본 흰색). 짙게 하면 글자·선이 밝게 뒤집힌다 */
-  --my-bg: #FFFFFF;
+  --my-bg: #F2EBDF;   /* 7주 2026-10-18: 흰색 → 크림 종이(레퍼런스 노트 톤) */
 
   /* ② 포인트 색 — 키보드 초점선 · tint 사진 덮개. 원본에는 포인트 색이 없다(none = 먹색) */
-  --my-point: none;
+  --my-point: #7A3E38;   /* 7주 2026-10-18: 없음 → 팥색(레퍼런스 노트 톤) */
 
   /* ③ 서체 짝   sans 고딕(기본) · serif 명조 · mono 고정폭 · hand 둥근 손글씨 */
   --my-type: sans;
@@ -28,3 +28,461 @@
      — 처음에 학생에게 "메뉴를 한글로 할까요, 영문으로 할까요?" 묻고 답대로 둔다. 기본 = en 영문(기본 — 원본 영문 메뉴) */
   --my-menu-lang: en;
 }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 첫 화면 ═══ */
+:root {
+  /* 사진 전환 — 한 장 머무는 시간 · 바뀌는 시간 (my-hero-fade.js 가 읽는다) */
+  --my-hero-stay: 3s;
+  --my-hero-fade: 1.2s;
+  /* 타이핑 — 한 글자 속도 · 시작 전 기다림 (my-typing.js 가 읽는다) */
+  --my-type-speed: 75ms;
+  --my-type-delay: 600ms;
+  /* 첫 화면 문장 서체 — 앞에서부터 있는 것을 쓴다. Remington Typewriter 는 설치된 컴퓨터에서만 보이고, 없으면 Special Elite(무료 타자기체) */
+  /* 첫 화면 사진 위 검은 막 진하기 — 0 없음 · .45 지금 · 높을수록 어둡게 */
+  --my-hero-dim: .45;
+  --my-hero-font: 'Remington Typewriter', 'Special Elite', 'Courier Prime', 'Courier New', monospace;
+}
+
+/* 공간 사진 15장 겹쳐 두고 지금 장(.is-cur)만 보이게 */
+.my-hf img { position: absolute; inset: 0; opacity: 0; }
+.my-hf img.is-cur { opacity: 1; }
+.my-hf.is-run img { transition: opacity var(--my-hero-fade) ease; }
+.my-hf::before { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(0, 0, 0, var(--my-hero-dim)); pointer-events: none; }   /* 사진 위 검은 막 한 겹 — 문장이 더 잘 보이게 */
+
+/* 문장 정중앙 · 타자기체 · 흰 글자(사진이 계속 바뀌어 sig.js 자동 글자색 대신 고정) */
+.ca-top--hero .ca-hero-t { justify-content: center; align-items: center; text-align: center; padding-bottom: var(--ca-s1); }
+.ca-hero-t .ca-h1.my-tw { margin: 0 auto; max-width: none; font-family: var(--my-hero-font); font-weight: 400; letter-spacing: 0; line-height: 1.35; color: #FFFFFF !important; text-shadow: 0 1px 12px rgba(0, 0, 0, .45); }
+.ca-hero-t .ca-h1.my-tw { white-space: nowrap; font-size: min(var(--ca-h1), 5vw); }   /* 세 줄 그대로 — 폰에서는 글자를 줄여 줄이 접히지 않게 */
+.ca-h1.my-tw.is-plate .ca-h1-in { background: none; padding: 0; margin: 0; }
+
+/* 타이핑 — 아직 안 친 글자는 자리만 차지 */
+.my-tw-c { visibility: hidden; }
+.my-tw-c.on { visibility: visible; }
+.my-tw-cur, .my-tw-pre { position: relative; }
+.my-tw-cur::after, .my-tw-pre::before { content: ""; position: absolute; top: .1em; bottom: .1em; width: .08em; background: currentColor; visibility: visible; animation: my-blink 1s steps(1) infinite; }
+.my-tw-cur::after { right: -.12em; }
+.my-tw-pre::before { left: -.12em; }
+@keyframes my-blink { 50% { opacity: 0; } }
+
+
+/* ═══ 7주 커스텀 (2026-10-18) — 장 머리(1~5장 모두) ═══ */
+:root {
+  --my-ch-top: 200px;                       /* 장 위 여백 — 장 구분선(첫 화면 사진) ↔ 장 제목 */
+  --my-ch-gap: 72px;                        /* 장 제목·문장 ↔ 사진 사이 여백 */
+  --my-ch-label: clamp(28px, 3.5vw, 70px);   /* 장 제목('1장 시선' 등) 글자 크기 — 화면 폭에 맞춰 (원래 15px · 한때 140px → 반으로) */
+  --my-fade-time: 1s;                       /* 1장 사진 페이드인 시간 */
+}
+@media (max-width: 768px) { :root { --my-ch-top: 88px; --my-ch-gap: 40px; } }
+.ca-top--hero + main > #s2 { margin-top: 0 !important; }
+.ca-sec:not(.ca-split) > .ca-head, .ca-sec.ca-split { padding-top: var(--my-ch-top); }
+.ca-sec:not(.ca-split) > .ca-head { padding-bottom: var(--my-ch-gap); }
+.ca-sec .ca-label { font-size: var(--my-ch-label); line-height: 1.1; letter-spacing: -.03em; }
+.ca-sec .ca-lead { margin-top: calc(var(--my-ch-label) * .25); }
+
+/* 1장 사진 페이드인 — my-fade-in.js 가 화면에 들어온 사진에 .my-in 을 붙인다 */
+.my-fade { opacity: 0; transition: opacity var(--my-fade-time) ease; }
+.my-fade.my-in { opacity: 1; }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 노트 톤 · 모눈종이 · 바 호버 · 제목 물결 ═══ */
+:root {
+  --ca-ref-ink: #4A2E2B;          /* 글자·선 색 — 먹색 → 짙은 갈색 (sig.js 가 읽어 --ca-ink 로 씀) */
+  --my-grid: 24px;                /* 모눈 한 칸 크기 */
+  --my-grid-line: rgba(122, 62, 56, .13);   /* 모눈 선 색 — 팥색 13% */
+  --my-wave-step: 70ms;           /* 제목 물결 — 다음 글자까지 간격 */
+}
+
+/* 모눈종이 — 페이지 바탕 전체(첫 화면 사진은 위에 덮임) */
+body {
+  background-image:
+    linear-gradient(var(--my-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--my-grid-line) 1px, transparent 1px);
+  background-size: var(--my-grid) var(--my-grid);
+  background-position: -1px -1px;
+}
+/* 상세 화면 종이 질감은 2026-10-18 학생 요청으로 뺌(바탕 = 메인과 같은 종이색) */
+
+/* 노트 톤 — 장 제목은 바탕체, 사진엔 가는 갈색 테두리(레퍼런스의 사진 칸 테두리) */
+.ca-sec .ca-label { font-family: 'Noto Serif KR', serif; font-weight: 600; }
+.ca-sec .ca-fig img { border: 1px solid color-mix(in srgb, var(--ca-ink) 55%, transparent); }
+
+/* 위 메뉴 바 · 아래 ©2026 바
+   - 평소: 바탕 없음. 글자색 = --ca-ink(sig.js 가 --my-bg 밝기로 자동 계산 — 밝은 바탕이면 갈색, 어두운 바탕이면 흰색)
+   - 첫 화면 사진 위(my-bars.js 가 .my-on-hero): 흰 글자
+   - 마우스를 올리면: 흰 바탕 + 갈색 글자 */
+:root { --my-bar-hover-bg: rgba(255, 255, 255, .88); --my-bar-hover-ink: var(--ca-ref-ink); }
+.ca-gnb, .ca-bar-b { background: transparent !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; color: var(--ca-ink) !important; transition: background-color .35s ease, color .35s ease; }
+.ca-gnb.my-on-hero, .ca-bar-b.my-on-hero { color: #FFFFFF !important; }
+/* 어두운 장(.my-dark) 위를 지날 때 — my-bars.js 가 .my-on-dark: 밝은 글자 */
+.ca-gnb.my-on-dark, .ca-bar-b.my-on-dark { color: var(--my-dark-ink) !important; }
+@media (hover: hover) {
+  .ca-gnb:hover, .ca-bar-b:hover { background: var(--my-bar-hover-bg) !important; -webkit-backdrop-filter: blur(12px) !important; backdrop-filter: blur(12px) !important; color: var(--my-bar-hover-ink) !important; }
+}
+.ca-bar-b { box-shadow: none !important; }   /* ©2026 위 선 없앰 */
+
+/* 장 제목 · 제목 아래 문장 물결 — my-wave.js 가 글자를 하나씩 감싸고, 화면에 들어오면 .my-wave-on
+   문장은 제목이 다 나온 뒤 이어서, 글자가 많아 간격은 --my-wave-step-lead 로 더 짧게 */
+:root { --my-wave-step-lead: 30ms; }
+.my-wv-c { display: inline-block; opacity: 0; transform: translateY(.6em); }
+.my-wave-on .my-wv-c { animation: my-wave .9s cubic-bezier(.34, 1.56, .64, 1) both; animation-delay: calc(var(--base, 0ms) + var(--i) * var(--step, var(--my-wave-step))); }
+.ca-lead.my-wave-on { --step: var(--my-wave-step-lead); }
+@keyframes my-wave { 0% { opacity: 0; transform: translateY(.6em); } 60% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .my-wv-c { opacity: 1 !important; transform: none !important; } }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 1장 시선: 작은 사진 · 호버하면 종이 꾸미기가 펼쳐지고 문구가 나옴 ═══
+   학생 첨부 스케치(배치) + 종이 질감 사진(색·질감): 사진 뒤로 오트밀 종이 · 구멍 난 세이지 종이 · 크림 메모지가 겹쳐 펼쳐지고,
+   사진 귀퉁이에 클립, 메모지 위에 마스킹테이프, 문구는 메모지 위. 맨 오른쪽 카드는 좌우를 뒤집어 문구가 화면 밖으로 나가지 않게 */
+:root {
+  --ca-gut: 48px;                     /* 화면 양옆 여백 (원래 12px — 사이트 전체) */
+  --my-s2-photo: 58%;                 /* 카드 칸 안에서 사진이 차지하는 폭 (원래 100%) */
+  --my-s2-dim: .35;                   /* 호버 때 나머지 사진 진하기 */
+  --my-s2-blur: 3px;                  /* 호버 때 나머지 사진 흐림 */
+  --my-s2-zoom: 1.04;                 /* 호버된 사진 키우기 */
+  --my-s2-gap: 32px;                  /* 사진 ↔ 문구 사이 */
+  --my-s2-ease: cubic-bezier(.22, 1, .36, 1);
+  --my-note-w: 340px;                 /* 문구 칸 폭 — my-deco.js 가 세 문구 중 가장 긴 줄에 맞춰 다시 정한다(세 칸 같은 폭) */
+  /* 종이 결 — 아주 옅은 섬유 무늬(SVG 노이즈) */
+  --my-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .28 0 0 0 0 .22 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* 사진 아래 글자(이름 · 언제 · 이유 · More) 숨김 — 이름 버튼은 화면에서만 숨기고 키보드로는 그대로 누를 수 있게 둔다 */
+#s2 .ca-cap { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0 !important; }
+#s2 .ca-why, #s2 .ca-txt .ca-more { display: none !important; }   /* More 는 my-deco.js 가 문구 아래로 옮긴다 */
+
+/* 문구 — 장 제목과 같은 바탕체. 평소엔 없음, 호버하면 메모지 위에(폰·호버 없는 기기는 사진 아래에 늘 보임) */
+.my-quote { margin: 0; font: 400 18px/1.9 'Noto Serif KR', serif; letter-spacing: -.01em; color: var(--ca-ink); word-break: keep-all; }
+
+/* 문구 + More 묶음(.my-note) — my-deco.js 가 만든다 */
+#s2 .my-note .ca-more { display: inline-flex; margin-top: 6px; color: var(--ca-ink); }
+@media (min-width: 769px) {
+  /* 사진은 카드 칸 가운데 · 문구 묶음은 사진 옆에 떠서(옆 카드 위로 넘어가도 됨) */
+  #s2 .ca-track.is-all .ca-card { grid-template-rows: auto; grid-row: auto; grid-template-columns: minmax(0, 1fr); justify-items: center; align-items: start; position: relative; }
+  #s2 .ca-track.is-all .ca-figs { grid-row: 1; grid-column: 1; width: var(--my-s2-photo); }
+  #s2 .my-note { position: absolute; top: 96px; left: calc(50% + var(--my-s2-photo) / 2 + var(--my-s2-gap)); width: var(--my-note-w); z-index: 2; pointer-events: none; }
+  #s2 .my-quote { white-space: nowrap; }   /* 줄은 <br> 자리에서만 바뀐다 */
+  /* 맨 오른쪽 카드 — 문구 묶음은 사진 왼쪽(화면 밖으로 나가지 않게) */
+  #s2 .ca-card:last-child .my-note { left: auto; right: calc(50% + var(--my-s2-photo) / 2 + var(--my-s2-gap)); text-align: right; }
+}
+@media (max-width: 768px) {
+  #s2 .my-note { order: 2; margin-top: 12px; }
+  #s2 .my-quote { font-size: 15px; }
+}
+
+@media (hover: hover) and (min-width: 769px) {
+  #s2 .my-note { opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .5s var(--my-s2-ease); }
+  #s2 .ca-card:hover .my-note { opacity: 1; transform: none; transition-delay: .4s; }
+  #s2 .ca-card:hover .my-note .ca-more { pointer-events: auto; }
+  /* 나머지 카드는 흐리게, 호버된 사진은 조금 크게 */
+  #s2 .ca-card { transition: opacity .45s ease, filter .45s ease; }
+  #s2 .ca-fig { transition: transform .6s var(--my-s2-ease), opacity var(--my-fade-time) ease; }
+  #s2 .ca-track:has(.ca-card:hover) .ca-card:not(:hover) { opacity: var(--my-s2-dim); filter: blur(var(--my-s2-blur)); }
+  #s2 .ca-card:hover { z-index: 3; }
+  #s2 .ca-card:hover .ca-fig { transform: scale(var(--my-s2-zoom)); }
+}
+
+/* 꾸미기 종이 — my-deco.js 가 사진 상자 안(사진 뒤 · 클립·테이프는 사진 위)에 넣는다.
+   .my-pc = 자리·움직임·그림자, 안쪽 .my-pp = 종이 면(찢긴 가장자리 · 색 · 결). 평소엔 사진 뒤에 접혀 있다가 호버하면 차례로 펼쳐진다 */
+#s2 .ca-figs { position: relative; isolation: isolate; }
+#s2 .ca-figs > .ca-fig { position: relative; z-index: 1; box-shadow: 0 1px 2px rgba(60, 45, 30, .12), 0 8px 22px rgba(60, 45, 30, .16); }
+.my-deco { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.my-deco.is-top { z-index: 2; }
+.my-pc { position: absolute; opacity: 0; transform-origin: var(--o, 8%) 50%; transform: rotate(0deg) scaleX(.25);
+  filter: drop-shadow(0 1px 1px rgba(60, 45, 30, .14)) drop-shadow(0 6px 10px rgba(60, 45, 30, .10));
+  transition: transform .75s var(--my-s2-ease), opacity .25s ease; }
+#s2 .ca-card:hover .my-pc { opacity: 1; transform: rotate(var(--r)) scaleX(1); transition-delay: var(--d); }
+.my-pc.clip, .my-pc.tape { transform-origin: 50% 50%; transform: translateY(-12px) rotate(var(--r)); }
+#s2 .ca-card:hover .my-pc.clip, #s2 .ca-card:hover .my-pc.tape { transform: translateY(0) rotate(var(--r)); }
+.my-pp { position: absolute; inset: 0; background-blend-mode: multiply; }
+@media (hover: none), (max-width: 768px) { .my-deco { display: none; } }
+
+/* 종이 종류 — 질감 사진의 색: 오트밀 · 세이지 · 크림 · 마스킹테이프 */
+.my-pc.oat   .my-pp { background-color: #E6DED2; background-image: var(--my-noise), radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, .35), transparent 60%); }
+.my-pc.sage  .my-pp { background-color: #CDD1C2;
+  background-image: var(--my-noise), repeating-linear-gradient(transparent 0 25px, rgba(120, 128, 110, .22) 25px 26px);
+  -webkit-mask: radial-gradient(circle at 16px 50%, transparent 5px, #000 5.6px) 0 0 / 100% 28px repeat-y; mask: radial-gradient(circle at 16px 50%, transparent 5px, #000 5.6px) 0 0 / 100% 28px repeat-y; }
+.my-pc.cream .my-pp { background-color: #F4F0E7;
+  background-image: var(--my-noise), linear-gradient(rgba(150, 140, 120, .10) 1px, transparent 1px), linear-gradient(90deg, rgba(150, 140, 120, .10) 1px, transparent 1px);
+  background-size: auto, 18px 18px, 18px 18px; }
+.my-pc.tape  { filter: drop-shadow(0 1px 1px rgba(60, 45, 30, .10)); }
+.my-pc.tape  .my-pp { background-color: rgba(236, 229, 210, .78); background-image: var(--my-noise), linear-gradient(90deg, rgba(255, 255, 255, .25), transparent 40%, rgba(255, 255, 255, .2)); background-blend-mode: normal; }
+.my-pc.clip svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+/* 사진을 누르면 열리는 상세 화면 — 위·아래 바 자리까지 바탕으로 끝까지 채움(내용은 바에 가리지 않게 안쪽 여백) */
+.ca-detail { inset: 0 !important; padding-top: var(--ca-gnb-h); padding-bottom: var(--ca-menu-h); }
+
+@media (max-width: 768px) { :root { --ca-gut: 20px; } }   /* 폰 양옆 여백 (원래 12px) */
+
+/* ═══ 7주 커스텀 (2026-10-18) — 상세 화면 사진 콜라주(학생 첨부 무드보드 레퍼런스 배치) ═══
+   my-collage.js 가 사진마다 자리(--x --y --w --h --z)를 주고 색 면(.my-blk)을 넣는다. 넓은 화면에서만 — 폰은 원래 배치 */
+:root { --my-blk-d: 26%; --my-blk-m: 17%; --my-blk-l: 10%; }   /* 색 면 진하기(팥색 --ca-point 를 종이색에 섞는 양) — 높일수록 진해짐 */
+@media (min-width: 769px) {
+  .ca-d-grid.my-collage { display: block !important; position: relative; height: max(560px, calc(100svh - var(--ca-gnb-h) - var(--ca-menu-h) - 40px)); margin-top: 8px !important; }
+  .my-collage > figure, .my-blk { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h); margin: 0; }
+  .my-collage > figure { z-index: var(--z); }
+  .my-collage > figure img { display: block; width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; object-fit: cover !important; }
+  .my-collage > figure figcaption { display: none; }
+  .my-collage > figure.my-frame { padding: 10px; background: #FBF9F4; box-shadow: 0 6px 18px rgba(50, 40, 25, .16); }
+  .my-blk { z-index: 1; }
+  /* 색 면 — 사이트 팥색(--ca-point)을 종이색에 옅게 섞음(붉은 톤): 진하게 d · 중간 m · 옅게 l */
+  .my-blk.is-d { background: color-mix(in srgb, var(--ca-point) var(--my-blk-d), var(--ca-paper)); }
+  .my-blk.is-m { background: color-mix(in srgb, var(--ca-point) var(--my-blk-m), var(--ca-paper)); }
+  .my-blk.is-l { background: color-mix(in srgb, var(--ca-point) var(--my-blk-l), var(--ca-paper)); }
+  /* 열릴 때 하나씩 떠오르며 나타남 */
+  .ca-detail.is-on .my-collage > * { animation: my-col-in .7s cubic-bezier(.22, 1, .36, 1) backwards;   /* backwards — 끝난 뒤엔 호버 흐림이 먹히게 */ }
+  .ca-detail.is-on .my-collage > :nth-child(2) { animation-delay: .06s; } .ca-detail.is-on .my-collage > :nth-child(3) { animation-delay: .12s; }
+  .ca-detail.is-on .my-collage > :nth-child(4) { animation-delay: .18s; } .ca-detail.is-on .my-collage > :nth-child(5) { animation-delay: .24s; }
+  .ca-detail.is-on .my-collage > :nth-child(n+6) { animation-delay: .3s; }
+}
+@keyframes my-col-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 상세 콜라주: 호버하면 원본 비율 · 나머지 흐림 · 누르면 크게 보기 ═══ */
+@media (min-width: 769px) {
+  .my-collage > figure { cursor: zoom-in; transition: left .5s var(--my-s2-ease), top .5s var(--my-s2-ease), width .5s var(--my-s2-ease), height .5s var(--my-s2-ease), opacity .35s ease, filter .35s ease; }
+  .my-collage > figure.is-orig { z-index: 9; box-shadow: 0 10px 30px rgba(50, 40, 25, .22); }
+  .my-blk { transition: opacity .35s ease, filter .35s ease; }
+  .my-collage:has(> figure:hover) > :not(:hover) { opacity: .45; filter: blur(2px); }
+}
+/* 크게 보기 — my-collage.js 가 만든다. 누르거나 Esc 로 닫힘, ← → 로 넘김 */
+.my-lb { position: fixed; inset: 0; z-index: 120; display: flex; align-items: center; justify-content: center; padding: 4vh 6vw; background: color-mix(in srgb, var(--ca-paper) 92%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; cursor: zoom-out; }
+.my-lb.is-on { opacity: 1; visibility: visible; transition: opacity .3s ease, visibility 0s; }
+.my-lb img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; box-shadow: 0 14px 40px rgba(50, 40, 25, .25); transform: scale(.97); transition: transform .4s var(--my-s2-ease); }
+.my-lb.is-on img { transform: none; }
+.my-lb-x, .my-lb-p, .my-lb-n { position: absolute; min-width: 44px; min-height: 44px; padding: 0 12px; color: var(--ca-ink); font: 600 14px/44px var(--ca-f-head); }
+.my-lb-x { top: 12px; right: var(--ca-gut); }
+.my-lb-p { left: var(--ca-gut); top: 50%; transform: translateY(-50%); }
+.my-lb-n { right: var(--ca-gut); top: 50%; transform: translateY(-50%); }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 2장 어두운 바탕 · 찢은 종이 경계 ═══
+   레퍼런스(학생 첨부): 면과 면 사이를 선 대신 찢은 종이 가장자리로 나눔. 모양은 my-tear.js 가 SVG로 그림 */
+:root {
+  --my-dark: #3A2623;          /* 2장 바탕 — 사이트 갈색보다 한 단계 어둡게 */
+  --my-dark-ink: #F2EBDF;      /* 2장 글자·선 — 메인 종이색 */
+  --my-tear-paper: #FBF8F1;    /* 찢긴 자리에 드러나는 흰 종이 섬유 */
+  --my-tear-h: 72px;           /* 찢긴 가장자리 높이 */
+  --my-s3-gap: 400px;          /* 1장 → 2장 사이 여백(원래 104px) */
+}
+.my-dark { background: var(--my-dark); --ca-ink: var(--my-dark-ink); --ca-paper: var(--my-dark); color: var(--ca-ink); }
+.my-dark::before, .my-dark + .ca-sec::before { display: none !important; }   /* 장 구분선 없앰(위 · 아래) */
+#s3.my-dark { margin-top: var(--my-s3-gap) !important; padding-bottom: 96px; }
+/* 2장 → 3장: 스크롤해서 2장 아래끝이 화면 위 30% 위로 올라가면(my-tear.js 가 .is-lit) 2장 바탕이 스르르 사라지며 모눈종이로 바뀜.
+   다시 올라가면 어두워짐. 글자·선 색도 종이 위 색으로 돌아온다 */
+.my-dark { transition: background-color .7s ease, color .7s ease; }
+.my-dark.is-lit { background-color: color-mix(in srgb, var(--my-dark) 0%, transparent); --ca-ink: var(--ca-ref-ink); --ca-paper: var(--my-bg); }
+.my-dark .my-tear { transition: opacity .5s ease; }
+.my-dark.is-lit .my-tear { opacity: 0; }
+.my-dark + .ca-sec { margin-top: 0; }   /* 2장 ↔ 3장 사이 여백 줄임(2장 아래 안쪽 여백 + 3장 제목 위 여백만) */
+@media (max-width: 768px) { :root { --my-s3-gap: 200px; --my-tear-h: 44px; } #s3.my-dark { padding-bottom: 56px; } }
+.my-tear { position: absolute; left: 0; width: 100%; height: var(--my-tear-h); pointer-events: none; z-index: 1; }
+.my-tear.is-top { top: calc(var(--my-tear-h) * -1 + 1px); }
+.my-tear.is-bot { top: calc(100% - 1px); transform: scaleY(-1); }
+.my-tear svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.my-tear-paper { fill: var(--my-tear-paper); }   /* 보풀·그림자는 my-tear.js 의 SVG 필터(CSS filter 를 주면 덮이니 두지 않음) */
+.my-tear-dark { fill: var(--my-dark); }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 2장 · 3장 사진: 스크롤하면 아래에서 튀어 올라옴 · 호버하면 붕 뜸 ═══ */
+:root { --my-lift: 12px; }   /* 호버 때 떠오르는 높이 */
+.my-pop { opacity: 0; transform: translateY(90px) scale(.94); }
+.my-pop.my-in { opacity: 1; transform: none; animation: my-pop .9s cubic-bezier(.34, 1.56, .64, 1) backwards; }   /* backwards — 끝난 뒤엔 원래 호버·흐림 규칙이 먹히게 */
+@keyframes my-pop { 0% { opacity: 0; transform: translateY(90px) scale(.94); } 45% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+#s3 .ca-fig img { transition: transform .45s cubic-bezier(.34, 1.4, .64, 1), box-shadow .45s ease; }
+/* 3장 흩뿌린 칸 — 원래 '0에서 커지기' 대신 2장과 같은 튀어 오르기(my-fade-in.js), 호버도 칸 키우기 대신 사진이 떠오름 */
+#s4 .ca-cell img { --ca-sc-s: 1 !important; transform: none; transition: transform .45s cubic-bezier(.34, 1.4, .64, 1), box-shadow .45s ease; transition-delay: 0s; }
+#s4 .ca-cell:hover { transform: none; }
+@media (hover: hover) {
+  #s3 .ca-fig:hover img { transform: translateY(calc(var(--my-lift) * -1)); box-shadow: 0 calc(var(--my-lift) + 6px) 26px rgba(0, 0, 0, .45); }
+  #s4 .ca-cell:hover img { transform: translateY(calc(var(--my-lift) * -.6)); box-shadow: 0 10px 18px rgba(60, 40, 25, .25); }   /* 3장 — 칸이 작아 덜 뜨고, 밝은 바탕이라 그림자 옅게 */
+}
+@media (prefers-reduced-motion: reduce) { .my-pop { opacity: 1 !important; transform: none !important; animation: none !important; } }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 2장 상세 · 신문 기사 한 면(학생 첨부 신문 레퍼런스, 사이트 색 그대로) ═══
+   my-news.js 가 카드 안 <template class="my-news"> 를 상세에 붙이고 .ca-detail.is-news. 구성 셋: A(1번 카드) · B(2번) · C(3번) */
+.ca-detail.is-news .ca-d-grid, .ca-detail.is-news .ca-d-txt { display: none !important; }
+.my-news-page { padding: 28px 0 72px; }
+.my-np { max-width: 1120px; margin: 0 auto; color: var(--ca-ink); font: 400 14.5px/1.8 'Pretendard Variable', Pretendard, sans-serif; word-break: keep-all; }
+.my-np p { margin: 0 0 .8em; }
+.my-np-mast { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; padding: 14px 0 12px; border-top: 4px solid currentColor; box-shadow: inset 0 6px 0 -5px currentColor; }
+.my-np-name { margin: 0 !important; font: 600 clamp(48px, 7vw, 104px)/1 'Noto Serif KR', serif; letter-spacing: -.02em; text-align: center; }   /* 자간 붙임(원래 .12em) */
+.my-np-ear { margin: 0 !important; font: 700 12.5px/1.5 'Pretendard Variable', sans-serif; }
+.my-np-ear.is-r { text-align: right; }
+.my-np-line { display: flex; justify-content: space-between; gap: 12px; margin: 0 !important; padding: 6px 0; border-top: 1px solid currentColor; border-bottom: 4px solid currentColor; font: 400 15px/1.4 'Noto Serif KR', serif; }
+.my-np-hl { margin: 30px 0 6px; font: 600 clamp(28px, 3.4vw, 46px)/1.25 'Noto Serif KR', serif; text-align: center; letter-spacing: -.01em; }
+.my-np-sub { margin: 0 0 26px !important; padding-bottom: 18px; border-bottom: 1px solid currentColor; font: 400 19px/1.5 'Noto Serif KR', serif; text-align: center; }
+.my-np-h { margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid currentColor; font: 600 21px/1.35 'Noto Serif KR', serif; }
+.my-np-h2 { margin: 0 0 12px; font: 600 26px/1.3 'Noto Serif KR', serif; text-align: center; }
+.my-np-box { padding: 18px 20px; background: var(--ca-ink); color: var(--ca-paper); }
+.my-np-box-t { margin: 0 0 10px !important; font: 600 20px/1.3 'Noto Serif KR', serif; text-align: center; }
+.my-np-box ul, .my-np-box ol { margin: 0; padding: 0; list-style: none; }
+.my-np-box li { padding: 6px 0; border-top: 1px solid color-mix(in srgb, var(--ca-paper) 30%, transparent); }
+.my-np-fig { margin: 0; padding: 8px; border: 1px solid currentColor; }
+.my-np-fig img { display: block; width: 100%; height: auto; object-fit: cover; }
+.my-np-fig figcaption { margin-top: 6px; font: italic 400 13px/1.4 'Noto Serif KR', serif; text-align: right; opacity: .85; }
+.my-np-note { padding: 14px 18px; border: 1px solid currentColor; background: color-mix(in srgb, var(--ca-point) 9%, transparent); }
+.my-np-note .my-np-box-t { font-size: 16px; text-align: left; }
+.my-np-note p:last-child { margin: 0 !important; font: 400 17px/1.7 'Noto Serif KR', serif; }
+.my-np-more { font-weight: 700; font-size: 13px; }
+.my-np-src { margin-top: 30px !important; padding-top: 10px; border-top: 1px solid currentColor; font-size: 12px; line-height: 1.6; opacity: .85; }
+.my-np-src a { text-decoration: underline; text-underline-offset: 2px; }
+.my-np-body > * { min-width: 0; }
+
+@media (min-width: 769px) {
+  .my-np-body { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 28px; row-gap: 28px; align-items: start; }
+  /* A — 레퍼런스와 가장 비슷: 왼쪽 제목+진한 상자 · 가운데 글 · 오른쪽 큰 사진 / 아래 넓은 기사 · 날짜 상자 */
+  /* 1호 — 제목이 왼쪽·가운데 두 칸에 걸치고, 그 아래에서 진한 상자와 가운데 글이 같은 높이로 시작 */
+  .my-np--a .my-np-body { grid-template-rows: auto 1fr; }   /* 오른쪽 큰 사진이 두 줄에 걸쳐 남는 높이는 둘째 줄이 받게 → 제목 아래 틈이 벌어지지 않음 */
+  .my-np--a .my-np-hc { grid-column: 1 / 8; grid-row: 1; margin: 0; }
+  .my-np--a .my-np-c1 { grid-column: 1 / 5; grid-row: 2; }
+  .my-np--a .my-np-c2 { grid-column: 5 / 8; grid-row: 2; align-self: stretch; padding-left: 28px; margin-left: -14px; border-left: 1px solid currentColor; }
+  .my-np--a .my-np-c2 > :first-child { margin-top: -.45em; }   /* 첫 줄 글자 위끝을 진한 상자 위끝에 맞춤(줄 간격 몫만큼 올림) */
+  .my-np--a .my-np-f1 { grid-column: 8 / 13; grid-row: 1 / span 2; }
+  .my-np--a .my-np-f1 img { aspect-ratio: 1 / 1; }
+  .my-np--a .my-np-c3 { grid-column: 1 / 5; grid-row: 3 / span 2; display: grid; gap: 18px; padding-top: 18px; border-top: 4px solid currentColor; }
+  .my-np--a .my-np-wide { grid-column: 5 / 13; padding-top: 18px; border-top: 1px solid currentColor; }   /* 한 문단 그대로(2단 나눔 없음) */
+  .my-np--a .my-np-note { grid-column: 5 / 10; }   /* 날짜 상자 자리 → 내가 본 것 */
+  .my-np--b .my-np-f1 { grid-column: 1 / 9; }
+  .my-np--b .my-np-f1 img { aspect-ratio: 3 / 2; }
+  .my-np--b .my-np-nums { grid-column: 9 / 13; align-self: stretch; }
+  .my-np--b .my-np-c1 { grid-column: 1 / 7; }
+  .my-np--b .my-np-c2 { grid-column: 7 / 13; padding-left: 28px; margin-left: -14px; border-left: 1px solid currentColor; }
+  .my-np--b .my-np-quote { grid-column: 1 / 13; }
+  .my-np--b .my-np-strip { grid-column: 1 / 9; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .my-np--b .my-np-strip img { aspect-ratio: 4 / 5; }
+  .my-np--b .my-np-note { grid-column: 9 / 13; align-self: end; }
+  .my-np--c .my-np-lead { grid-column: 1 / 13; }
+  /* 3호 — 사진 셋 높이·위끝·캡션 줄 맞춤 */
+  .my-np--c .my-np-photos { grid-column: 1 / 13; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; align-items: start; }
+  .my-np--c .my-np-photos img { aspect-ratio: auto; height: 380px; object-position: 50% 25%; }
+  .my-np--c .my-np-col { grid-column: span 4; padding-top: 14px; border-top: 4px solid currentColor; }
+  .my-np--c .my-np-col + .my-np-col { padding-left: 28px; margin-left: -14px; border-left: 1px solid currentColor; }
+  .my-np--c .my-np-time { grid-column: 1 / 8; }
+  .my-np--c .my-np-note { grid-column: 8 / 13; align-self: stretch; }
+}
+@media (max-width: 768px) {
+  .my-np-mast { grid-template-columns: 1fr; text-align: center; } .my-np-ear { display: none; }
+  .my-np-body > * { margin-bottom: 22px; }
+  .my-np--c .my-np-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; } .my-np--c .my-np-photos .my-np-f1 { grid-column: 1 / -1; }
+  .my-np--b .my-np-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+/* B · 숫자 상자 */
+.my-np-nums dl { margin: 0; display: grid; gap: 0; }
+.my-np-nums dl div { padding: 10px 0; border-top: 1px solid color-mix(in srgb, var(--ca-paper) 30%, transparent); text-align: center; }
+.my-np-nums dt { font: 600 30px/1.2 'Noto Serif KR', serif; }
+.my-np-nums dd { margin: 2px 0 0; font-size: 13px; opacity: .85; }
+/* B · 인용 */
+.my-np-quote { margin: 0; padding: 22px 0; border-top: 4px solid currentColor; border-bottom: 1px solid currentColor; text-align: center; }
+.my-np-quote p { margin: 0 0 6px !important; font: 600 clamp(24px, 2.6vw, 34px)/1.35 'Noto Serif KR', serif; }
+.my-np-quote cite { font: italic 400 14px/1.4 'Noto Serif KR', serif; opacity: .85; }
+/* A · 날짜 상자 */
+.my-np-date { display: grid; justify-items: center; gap: 2px; padding: 18px 12px; background: var(--ca-ink); color: var(--ca-paper); font: 400 18px/1.3 'Noto Serif KR', serif; letter-spacing: .08em; }
+.my-np-date b { font: 600 64px/1 'Noto Serif KR', serif; }
+.my-np-date small { margin-top: 6px; font-size: 14px; }
+/* C · 리드 · 번호 · 연표 (리드 첫 글자 크게 하기는 2026-10-18 학생 요청으로 뺌) */
+.my-np-lead { font: 400 17px/1.85 'Noto Serif KR', serif; }
+.my-np-no { margin: 0 0 4px !important; font: 600 34px/1 'Noto Serif KR', serif; opacity: .5; }
+.my-np-time li { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; }
+.my-np-time li b { font-family: 'Noto Serif KR', serif; }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 4장: 클립으로 끼운 줄노트 한 장 · 폴라로이드 넘기기 ═══ */
+:root {
+  --my-note-paper: #FFFDF8;                    /* 줄노트 — 페이지 종이색보다 밝게 */
+  --my-note-rule: rgba(110, 125, 160, .26);    /* 가로줄(32px 간격 — my-polaroid.js 가 설명 줄을 여기에 맞춤) */
+  --my-note-margin: rgba(196, 92, 80, .38);    /* 왼쪽 빨간 여백선 */
+  --my-note-w: 1200px;                         /* 노트 폭 — 페이지보다 좁게 가운데 */
+  --my-pl-w: 340px;                            /* 가운데 폴라로이드 폭 */
+}
+@media (max-width: 768px) { :root { --my-pl-w: 210px; } }
+/* 4장 — 장 구분선 없애고 3장과 사이를 더 벌림. 제목은 다른 장처럼 페이지 위, 줄노트 한 장은 제목 오른쪽(화면 오른쪽) */
+#s5::before { display: none !important; }
+#s5 { margin-top: 130px; }   /* 3장 끝 ~ 4장 제목 = 130 + 제목 위 200 = 330px(전 440px의 3/4) */
+@media (min-width: 769px) {
+  #s5.has-pl { display: grid; grid-template-columns: repeat(var(--ca-cols), minmax(0, 1fr)); column-gap: var(--ca-gap); align-items: start; }
+  #s5.has-pl > .ca-head { grid-column: 1 / 5; }
+  #s5.has-pl > .my-note-sheet { grid-column: 5 / -1; margin-top: calc(var(--my-ch-top) - 24px); }   /* 노트 위끝 = 제목 줄 근처 */
+}
+@media (max-width: 768px) { #s5 { margin-top: 70px; } #s5.has-pl > .ca-head { padding-bottom: 72px; } }
+/* 줄노트 한 장 — 페이지보다 밝은 종이 · 왼쪽 링 구멍 · 빨간 여백선 · 가로줄 · 살짝 뜬 그림자 */
+.my-note-sheet { position: relative; padding: 118px 40px 48px 96px;   /* 위 118px = 클립 아래끝(약 96px)보다 아래에서 사진 시작 */
+  background-color: var(--my-note-paper);
+  background-image:
+    radial-gradient(circle at 34px 32px, var(--my-bg) 0 9px, rgba(60, 40, 25, .18) 9.5px, transparent 11px),
+    linear-gradient(90deg, transparent 70px, var(--my-note-margin) 70px, var(--my-note-margin) 71px, transparent 71px),
+    repeating-linear-gradient(transparent 0 31px, var(--my-note-rule) 31px 32px);
+  background-size: 68px 64px, auto, auto; background-repeat: repeat-y, no-repeat, repeat;
+  box-shadow: 0 1px 2px rgba(60, 40, 25, .10), 0 16px 38px rgba(60, 40, 25, .13); }
+@media (max-width: 768px) {
+  .my-note-sheet { padding: 84px 12px 40px 44px; background-image:
+    radial-gradient(circle at 18px 32px, var(--my-bg) 0 6px, rgba(60, 40, 25, .18) 6.5px, transparent 8px),
+    linear-gradient(90deg, transparent 36px, var(--my-note-margin) 36px, var(--my-note-margin) 37px, transparent 37px),
+    repeating-linear-gradient(transparent 0 31px, var(--my-note-rule) 31px 32px);
+    background-size: 36px 64px, auto, auto; }
+}
+/* 노트를 끼운 굵은 클립 — 노트 위 가운데, 위끝에 걸침 */
+.my-note-sheet::after { content: ""; position: absolute; top: -46px; left: 50%; width: 52px; height: 142px; margin-left: -26px; z-index: 5; pointer-events: none; transform: rotate(-4deg);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 80'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23928E88'/%3E%3Cstop offset='.45' stop-color='%23E9E6E1'/%3E%3Cstop offset='1' stop-color='%23847F79'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M11 22 V58 a6.5 6.5 0 0 0 13 0 V14 a9.5 9.5 0 0 0 -19 0 V60 a12 12 0 0 0 24 0 V26' fill='none' stroke='url(%23g)' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(1px 4px 3px rgba(40, 25, 15, .28)); }
+@media (max-width: 768px) { .my-note-sheet::after { width: 38px; height: 104px; top: -34px; margin-left: -19px; } }
+
+/* 폴라로이드 — 원래 카드 줄은 화면에서만 숨김(상세는 원래 카드로 열림) */
+#s5.has-pl .ca-track, #s5.has-pl .ca-index { display: none !important; }
+.my-pl { position: relative; overflow-x: clip; }
+.my-pl-stage { position: relative; height: calc(var(--my-pl-w) + 120px); }
+.my-pl-item { position: absolute; left: 50%; top: 20px; width: var(--my-pl-w); margin-left: calc(var(--my-pl-w) / -2); padding: 14px 14px 0; border: 0; background: #FFFFFF; cursor: pointer; text-align: center;
+  box-shadow: 0 1px 2px rgba(60, 40, 25, .12), 0 10px 24px rgba(60, 40, 25, .16);
+  transition: transform .9s cubic-bezier(.22, 1, .36, 1), opacity .6s ease, filter .6s ease; }
+.my-pl-pic { position: relative; display: block; }
+.my-pl-item img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.my-pl-item .my-pl-img2 { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .45s ease; }   /* 두 번째 사진 — 마우스를 올리면 */
+@media (hover: hover) { .my-pl-item:hover .my-pl-img2 { opacity: 1; } }
+.my-pl-name { display: block; height: 58px; font: 600 19px/58px 'Noto Serif KR', serif; color: var(--ca-ref-ink); }
+.my-pl-tape { position: absolute; top: -14px; left: 50%; width: 96px; height: 28px; margin-left: -48px; transform: rotate(-3deg); background: rgba(236, 229, 210, .8); box-shadow: 0 1px 2px rgba(60, 40, 25, .1); }
+/* 자리 — 가운데(0) · 왼쪽 뒤(-1) · 오른쪽 뒤(1) · 그 밖은 가운데 뒤에 숨김 */
+.my-pl-item[data-d="0"]  { z-index: 3; transform: rotate(var(--tilt)); cursor: zoom-in; }
+.my-pl-item[data-d="-1"] { z-index: 2; transform: translateX(-62%) translateY(26px) rotate(calc(var(--tilt) - 6deg)) scale(.8); filter: brightness(.97); }
+.my-pl-item[data-d="1"]  { z-index: 2; transform: translateX(62%) translateY(26px) rotate(calc(var(--tilt) + 6deg)) scale(.8); filter: brightness(.97); }
+.my-pl-item[data-d="far"] { z-index: 1; transform: translateY(40px) rotate(var(--tilt)) scale(.7); opacity: 0; pointer-events: none; }
+.my-pl-item:not([data-d="0"]) .my-pl-tape { opacity: 0; }
+/* 한 줄 설명 — 노트 가로줄 위(줄 간격 32px) */
+.my-pl-when { margin: 0; font: 400 18px/32px 'Noto Serif KR', serif; text-align: center; }   /* 언제·어떻게 — 위치는 my-polaroid.js 가 가로줄에 맞춤 */
+/* 왼쪽 칸 물건 목록 */
+.my-pl-list { margin: 40px 0 0; padding: 0; list-style: none; }   /* 선 없음 */
+.my-pl-list li { opacity: .45; transition: opacity .35s ease; }
+.my-pl-list li.is-on { opacity: 1; }
+.my-pl-list button { display: grid; grid-template-columns: 2.6em 1fr; align-items: baseline; width: 100%; padding: 14px 0; text-align: left; color: inherit; }
+.my-pl-no { font: 600 14px/1 'Noto Serif KR', serif; font-variant-numeric: tabular-nums; }
+.my-pl-li b { display: block; font: 600 19px/1.4 'Noto Serif KR', serif; }
+.my-pl-li small { display: block; margin-top: 2px; font-size: 13.5px; line-height: 1.5; }
+@media (hover: hover) { .my-pl-list li:hover { opacity: 1; } }
+@media (max-width: 768px) { .my-pl-list { margin-top: 24px; } .my-pl-list button { padding: 10px 0; } .my-pl-li small { display: none; } }
+.my-pl-nav { display: flex; justify-content: center; align-items: center; gap: 20px; height: 44px; margin-top: 8px; }
+.my-pl-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; font: 600 18px/1 'Noto Serif KR', serif; color: var(--ca-ink); }   /* 화살표·숫자 같은 글꼴·같은 가운데 줄 */
+.my-pl-count { display: inline-flex; align-items: center; height: 44px; font: 600 15px/1 'Noto Serif KR', serif; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .my-pl-item { transition: none; } }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 4장 노트 등장 · 클립 끼우기(화면에 들어오면 저절로 한 번 — my-polaroid.js 가 .my-ready → .is-in) ═══
+   노트: 아래·기울어진 채 떠올라 바로 섬(0.8초) → 클립: 0.5초 뒤 위에서 비스듬히 내려와 끼우고 딸깍 */
+.my-note-sheet.my-ready { transform: translateY(120px) rotate(-3deg); opacity: .2; transition: transform .8s cubic-bezier(.22, 1, .36, 1), opacity .5s ease; }
+.my-note-sheet.my-ready.is-in { transform: none; opacity: 1; }
+.my-note-sheet.my-ready::after { opacity: 0; transform: translateY(-160px) rotate(-26deg); }
+.my-note-sheet.my-ready.is-in::after { animation: my-clip-in .75s cubic-bezier(.34, 1.5, .64, 1) .5s both; }
+@keyframes my-clip-in { 0% { opacity: 0; transform: translateY(-160px) rotate(-26deg); } 25% { opacity: 1; } 70% { transform: translateY(6px) rotate(-3deg); } 85% { transform: translateY(-3px) rotate(-5deg); } 100% { opacity: 1; transform: translateY(0) rotate(-4deg); } }
+@media (prefers-reduced-motion: reduce) { .my-note-sheet, .my-note-sheet::after { transform: none !important; opacity: 1 !important; animation: none !important; } }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 기준이 쌓이는 자리 = 푸터처럼(2장과 같은 어두운 바탕 · 글씨 작게) ═══ */
+.my-foot { margin-top: 200px; margin-bottom: calc(var(--ca-menu-h, 44px) * -1); padding-top: 56px; padding-bottom: calc(var(--ca-menu-h, 44px) + 56px);   /* 아래 바 자리(body 아래 여백)까지 어둡게 채움 */
+  background: var(--my-dark); color: var(--my-dark-ink); --ca-ink: var(--my-dark-ink); --ca-paper: var(--my-dark); }
+.my-foot::before { display: none !important; }   /* 장 구분선 없앰 */
+#s6.my-foot > .ca-head { padding-top: 0; padding-bottom: 20px; }
+#s6.my-foot .ca-label { font-size: 20px; letter-spacing: 0; }
+.my-foot .ca-rows { margin-top: 0; }
+.my-foot .ca-r { padding: 10px 0; border-bottom-color: color-mix(in srgb, var(--my-dark-ink) 28%, transparent); }
+.my-foot .ca-r:first-child { border-top-color: color-mix(in srgb, var(--my-dark-ink) 28%, transparent); }
+.my-foot .ca-r dt { font-size: 13px; opacity: .75; }
+.my-foot .ca-r dd { font-size: 15px; line-height: 1.6; }
+@media (max-width: 768px) { .my-foot { margin-top: 120px; padding-top: 40px; } }
+
+/* ═══ 7주 커스텀 (2026-10-18) — 3장 점선 길(my-map.js): 사진 밭 위로만 공간들을 여행하듯 지나가다 3장 → 4장 즈음 화면 밖으로. 3장이 보이면 저절로 그려짐 ═══ */
+:root { --my-route-time: 6.4s; }   /* 다 그려지는 시간(3.2초 → 학생 요청으로 두 배 느리게) */
+#s4 { isolation: isolate; }   /* 점선을 3장 안쪽 맨 뒤(사진 뒤)에 */
+.my-route { position: absolute; left: 0; top: 0; z-index: -1; pointer-events: none; }
+.my-route svg { display: block; overflow: visible; }
+.my-route-line { fill: none; stroke: var(--ca-point); stroke-width: 2.2; stroke-dasharray: 9 10; stroke-linecap: round; opacity: .75; }
+.my-route-reveal { fill: none; stroke: #fff; stroke-width: 12; stroke-linecap: round; }
+.my-route.is-drawn .my-route-reveal { transition: stroke-dashoffset var(--my-route-time) linear; }   /* 처음부터 끝까지 같은 속도 */
+@media (max-width: 768px) { .my-route { display: none; } }   /* 폰은 사진 밭이 글 바로 아래라 길을 빼 둠 */
